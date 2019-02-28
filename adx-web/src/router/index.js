@@ -42,25 +42,7 @@ export const asyncRouterMap = [
       },
     ]
   },
-  {
-    path: '/user',
-    component: Layout,
-    redirect: '/user/',
-    name: '',
-    meta: {title: '用户权限', icon: 'table'},
-    children: [
-      {
-        path: '', name: '用户列表', component: _import('user/user'), meta: {title: '用户列表', icon: 'user'}, menu: 'user'
-      },
-      {
-        path: 'role',
-        name: '权限管理',
-        component: _import('user/role'),
-        meta: {title: '权限管理', icon: 'password'},
-        menu: 'role'
-      },
-    ]
-  },
+
   {
     path: '/flow',
     component: Layout,
@@ -92,7 +74,7 @@ export const asyncRouterMap = [
     ]
   },
   {
-    path: '/adv-manage',
+    path: '/adv',
     component: Layout,
     redirect: '/adv-manage/',
     name: '广告管理',
@@ -119,6 +101,125 @@ export const asyncRouterMap = [
         meta: {title: '客户管理', icon: 'password'},
         menu: 'customer'
       }
+    ]
+  },
+  {
+    path: '/report',
+    component: Layout,
+    redirect: '/report-center/',
+    name: '报表中心',
+    meta: {title: '报表中心', icon: 'table'},
+    children: [
+      {
+        path: '1',
+        name: '流量时段报表',
+        component: _import('report-center/flow-period-report'),
+        meta: {title: '流量时段报表', icon: ''},
+        menu: 'report'
+      },
+      {
+        path: '2',
+        name: '广告位流量明细',
+        component: _import('report-center/adv-space-flow'),
+        meta: {title: '广告位流量明细', icon: ''},
+        menu: 'report'
+      },
+      {
+        path: '3',
+        name: '流量填充报表',
+        component: _import('report-center/flow-filled-report'),
+        meta: {title: '流量填充报表', icon: ''},
+        menu: 'report'
+      },
+      {
+        path: '4',
+        name: '渠道报表',
+        component: _import('report-center/channel-report'),
+        meta: {title: '渠道报表', icon: ''},
+        menu: 'report'
+      },
+      {
+        path: '5',
+        name: '广告时段报表',
+        component: _import('report-center/adv-period-report'),
+        meta: {title: '广告时段报表', icon: ''},
+        menu: 'report'
+      },
+      {
+        path: '6',
+        name: '广告投放报表',
+        component: _import('report-center/adv-put-report'),
+        meta: {title: '广告投放报表', icon: ''},
+        menu: 'report'
+      },
+      // {
+      //   path: '7',
+      //   name: '广告投放报表',
+      //   component: _import('report-center/adv-put-report'),
+      //   meta: {title: '广告投放报表', icon: ''},
+      //   menu: 'report'
+      // },
+      {
+        path: '7',
+        name: '广告流量明细',
+        component: _import('report-center/adv-flow-details'),
+        meta: {title: '广告流量明细', icon: ''},
+        menu: 'report'
+      },
+      {
+        path: '8',
+        name: 'RTB平台统计报表',
+        component: _import('report-center/RTB-platform-report'),
+        meta: {title: 'RTB平台统计报表', icon: ''},
+        menu: 'report'
+      },
+      {
+        path: '9',
+        name: '对比报表',
+        component: _import('report-center/comparison-report'),
+        meta: {title: '对比报表', icon: ''},
+        menu: 'report'
+      },
+      {
+        path: '10',
+        name: 'APK报表',
+        component: _import('report-center/APK-report'),
+        meta: {title: 'APK报表', icon: ''},
+        menu: 'report'
+      },
+      {
+        path: '11',
+        name: '媒体域名报表',
+        component: _import('report-center/media-domain-report'),
+        meta: {title: '媒体域名报表', icon: ''},
+        menu: 'report'
+      },
+      {
+        path: '12',
+        name: '地域报表',
+        component: _import('report-center/regional-report'),
+        meta: {title: '地域报表', icon: ''},
+        menu: 'report'
+      }
+    ]
+  },
+  {
+    path: '/user',
+    component: Layout,
+    redirect: '/user/',
+    name: '',
+    meta: {title: '用户权限', icon: 'table'},
+    children: [
+      {
+        path: '', name: '用户列表', component: _import('user/user'), meta: {title: '用户列表', icon: 'user'}, menu: 'user'
+      },
+      {
+        path: 'role',
+        name: '权限管理',
+        component: _import('user/role'),
+        meta: {title: '权限管理', icon: 'password'},
+        menu: 'role'
+      },
     ]
   },
   {path: '*', redirect: '/404', hidden: true}
