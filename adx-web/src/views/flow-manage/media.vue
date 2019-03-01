@@ -69,6 +69,14 @@
             </div>
           </el-col>
 
+          <el-col :span="4" class="searchBtn">
+            <div class="grid-content bg-purple">
+              <el-row>
+                <el-button  size="small" type="primary">添加</el-button>
+              </el-row>
+            </div>
+          </el-col>
+
         </el-row>
 
       </el-header>

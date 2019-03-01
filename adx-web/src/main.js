@@ -9,7 +9,9 @@ import store from './store'
 import '@/icons' // icon
 import '@/permission' // 权限
 import {default as api} from './utils/api'
-import {hasPermission} from "./utils/hasPermission";
+import {hasPermission} from "./utils/hasPermission"
+import $ from 'jquery'
+
 Vue.use(ElementUI, {locale})
 Vue.prototype.api = api
 //全局的常量
