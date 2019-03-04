@@ -1,10 +1,64 @@
 <template>
   <div>
     <el-container>
+    <div v-show="false" id="advTop1">
+      <h3 class="title">媒体添加</h3>
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="媒体名称" prop="name">
+          <el-input v-model="ruleForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="渠道主" prop="region">
+          <el-select v-model="ruleForm.region" placeholder="请选择">
+            <el-option label="华育" value="shanghai"></el-option>
+            <el-option label="太原" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="布控方式" prop="resource">
+          <el-radio-group v-model="ruleForm.resource">
+            <el-radio label="客户"></el-radio>
+            <el-radio label="云袭pl"></el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="媒体类型" prop="resource">
+          <el-radio-group v-model="ruleForm.resource">
+            <el-radio label="wap"></el-radio>
+            <el-radio label="PC"></el-radio>
+            <el-radio label="Android"></el-radio>
+            <el-radio label="IOS"></el-radio>
+            <el-radio label="流量包"></el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="网站分类" prop="region">
+          <el-select v-model="ruleForm.region" placeholder="选择网站分类">
+            <el-option label="华育" value="shanghai"></el-option>
+            <el-option label="太原" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="网址" prop="name">
+          <el-input v-model="ruleForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="副网址">
+          <el-input v-model="ruleForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="备案号">
+          <el-input v-model="ruleForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="简介">
+          <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
+          <el-button @click="resetForm('ruleForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+      </el-container>
+
+    <div v-show="true">
+    <el-container>
       <el-header id="advTop">
 
         <el-row :gutter="20">
-
           <el-col :span="4">
             <div class="grid-content bg-purple">
               <el-select class="select1" size="small" v-model="value1" clearable placeholder="全部渠道">
@@ -56,10 +110,6 @@
               </el-select>
             </div>
           </el-col>
-
-          <!--<el-col :span="4"><div class="grid-content bg-purple">-->
-          <!--<el-input class="input" size="small" v-model="input" placeholder="请输入搜索关键字"></el-input>-->
-          <!--</div></el-col>-->
 
           <el-col :span="4">
             <div class="grid-content bg-purple">
@@ -142,16 +192,47 @@
         </el-pagination>
       </el-footer>
     </el-container>
+    </div>
+
+
   </div>
 </template>
 
 <script>
   export default {
-    name: "media",
+    // name: "media",
 
 
     data() {
       return {
+        ruleForm: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
+        rules: {
+          name: [
+            { required: true, message: '请输入媒体名称', trigger: 'blur' },
+            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          ],
+          region: [
+            { required: true, message: '请选择渠道主', trigger: 'change' }
+          ],
+          type: [
+            { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+          ],
+          resource: [
+            { required: true, message: '请选择活动资源', trigger: 'change' }
+          ],
+          desc: [
+            { required: true, message: '请填写活动形式', trigger: 'blur' }
+          ]
+        },
         options: [{
           value: '选项1',
           label: '黄金糕'
@@ -238,6 +319,7 @@
           }]
       }
     },
+
     methods: {
       formatter(row, column) {
         return row.address;
@@ -247,32 +329,41 @@
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
+      },
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
       }
+
     }
   }
 </script>
 
 <style scoped>
-  .el-row {
-    margin-bottom: 20px;
-    /*&:last-child {*/
-    /*margin-bottom: 0;*/
-    /*}*/
-  }
 
-  .el-col {
-    border-radius: 1px;
-  }
 
   .grid-content {
     border-radius: 4px;
     min-height: 20px;
   }
-
-  .row-bg {
-    padding: 5px;
+  #advTop1 {
+    top: 50px;
+    left: 100px;
+    position: relative;
   }
-
+  .title {
+    color: red;
+    margin-bottom: 50px;
+  }
   #advTop {
     top: 50px;
     left: 20px;
