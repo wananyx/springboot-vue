@@ -7,9 +7,9 @@
 
           <el-col :span="4">
             <div class="grid-content bg-purple">
-              <el-select class="select1" size="small" v-model="value1" clearable placeholder="全部类型">
+              <el-select class="select1" filterable size="small" v-model="value1" clearable placeholder="全部类型">
                 <el-option
-                  v-for="item in options"
+                  v-for="item in options1"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
@@ -20,9 +20,9 @@
 
           <el-col :span="4">
             <div class="grid-content bg-purple">
-              <el-select class="select2" v-model="value2" size="small" clearable placeholder="全部尺寸">
+              <el-select class="select2" filterable v-model="value2" size="small" clearable placeholder="全部尺寸">
                 <el-option
-                  v-for="item in options"
+                  v-for="item in options2"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
@@ -129,21 +129,25 @@
 
     data() {
       return {
-        options: [{
+        options1: [{
           value: '选项1',
-          label: '黄金糕'
+          label: '横幅'
         }, {
           value: '选项2',
-          label: '双皮奶'
+          label: '信息流'
         }, {
           value: '选项3',
-          label: '蚵仔煎'
+          label: '视频'
+        }],
+        options2: [{
+          value: '选项1',
+          label: '640*120'
         }, {
-          value: '选项4',
-          label: '龙须面'
+          value: '选项2',
+          label: '120*40'
         }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: '选项3',
+          label: '40*10'
         }],
         value1: '',
         value2: '',

@@ -6,7 +6,7 @@
 
           <el-col :span="4">
             <div class="grid-content bg-purple">
-              <el-select class="select1" size="small" v-model="value1" clearable placeholder="全部渠道">
+              <el-select class="select1" filterable size="small" v-model="value1" clearable placeholder="全部渠道">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -19,7 +19,7 @@
 
           <el-col :span="4">
             <div class="grid-content bg-purple">
-              <el-select class="select2" v-model="value2" size="small" clearable placeholder="全部渠道类型">
+              <el-select class="select2" filterable v-model="value2" size="small" clearable placeholder="全部渠道类型">
                 <el-option
                   v-for="item in options"
                   :key="item.value"

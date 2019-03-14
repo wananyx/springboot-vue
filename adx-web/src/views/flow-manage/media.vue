@@ -8,7 +8,7 @@
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
         <el-form-item label="渠道主" prop="region">
-          <el-select v-model="ruleForm.region" placeholder="请选择">
+          <el-select filterable v-model="ruleForm.region" placeholder="请选择">
             <el-option label="华育" value="shanghai"></el-option>
             <el-option label="太原" value="beijing"></el-option>
           </el-select>
@@ -61,7 +61,7 @@
         <el-row :gutter="20">
           <el-col :span="4">
             <div class="grid-content bg-purple">
-              <el-select class="select1" size="small" v-model="value1" clearable placeholder="全部渠道">
+              <el-select class="select1" filterable size="small" v-model="value1" clearable placeholder="全部渠道">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -74,7 +74,7 @@
 
           <el-col :span="4">
             <div class="grid-content bg-purple">
-              <el-select class="select2" v-model="value2" size="small" clearable placeholder="全部媒体">
+              <el-select class="select2" filterable v-model="value2" size="small" clearable placeholder="全部媒体">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -87,7 +87,7 @@
 
           <el-col :span="4">
             <div class="grid-content bg-purple">
-              <el-select class="select3" v-model="value3" size="small" clearable placeholder="全部媒体类型">
+              <el-select class="select3" filterable v-model="value3" size="small" clearable placeholder="全部媒体类型">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -100,7 +100,7 @@
 
           <el-col :span="4">
             <div class="grid-content bg-purple">
-              <el-select class="select4" v-model="value4" size="small" clearable placeholder="全部审核状态">
+              <el-select class="select4" filterable v-model="value4" size="small" clearable placeholder="全部审核状态">
                 <el-option
                   v-for="item in options"
                   :key="item.value"

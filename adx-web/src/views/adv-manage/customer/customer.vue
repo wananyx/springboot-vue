@@ -1,13 +1,14 @@
 <template>
   <div>
-    <el-container>
+    <customer_edit v-show="showEdit" :s-how="showEdit" v-on:showPage="showEditPage"></customer_edit>
+    <el-container v-show="!showEdit">
       <el-header id="advTop">
 
-        <el-row class="el-row" :gutter="20">
+        <el-row :gutter="20">
 
-          <el-col class="el-col" :span="4">
+          <el-col :span="4">
             <div class="grid-content bg-purple">
-              <el-select class="select1" filterable size="small" v-model="value1" clearable placeholder="全部渠道">
+              <el-select class="select1" filterable size="small" v-model="value1" clearable placeholder="请选择查询方式">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -18,52 +19,13 @@
             </div>
           </el-col>
 
-          <el-col class="el-col" :span="4">
+          <el-col :span="4">
             <div class="grid-content bg-purple">
-              <el-select class="select2" filterable v-model="value2" size="small" clearable placeholder="全部媒体">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
+              <el-input class="input" size="small" v-model="input" placeholder="请输入查询内容"></el-input>
             </div>
           </el-col>
 
-          <el-col class="el-col" :span="4">
-            <div class="grid-content bg-purple">
-              <el-select class="select3" filterable v-model="value3" size="small" clearable placeholder="全部类型">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </div>
-          </el-col>
-
-          <el-col class="el-col" :span="4">
-            <div class="grid-content bg-purple">
-              <el-select class="select4" filterable v-model="value4" size="small" clearable placeholder="全部审核状态">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </div>
-          </el-col>
-
-          <el-col class="el-col" :span="4">
-            <div class="grid-content bg-purple">
-              <el-input class="input" filterable size="small" v-model="input" placeholder="请输入搜索关键字"></el-input>
-            </div>
-          </el-col>
-
-          <el-col class="el-col" :span="4">
+          <el-col :span="4">
             <div class="grid-content bg-purple">
               <el-row>
                 <el-button class="searchBtn" size="small" type="primary">搜索</el-button>
@@ -71,11 +33,17 @@
             </div>
           </el-col>
 
+          <el-col :span="7" class="searchBtn">
+            <div class="grid-content bg-purple">
+              <el-row>
+                <el-button size="small" type="primary" @click="showEditPage">添加</el-button>
+              </el-row>
+            </div>
+          </el-col>
+
         </el-row>
 
       </el-header>
-
-
 
       <el-main id="advCentre">
         <el-table
@@ -91,23 +59,23 @@
           </el-table-column>
           <el-table-column
             prop="name"
-            label="广告位"
+            label="广告主名称"
             sortable
             width="180">
           </el-table-column>
           <el-table-column
             prop="type"
-            label="类型"
+            label="联系人"
           >
           </el-table-column>
           <el-table-column
-            prop="status"
-            label="状态"
+            prop="size"
+            label="邮箱"
           >
           </el-table-column>
           <el-table-column
-            prop="auditing"
-            label="审核状态"
+            prop="source"
+            label="开通后台"
           >
           </el-table-column>
           <el-table-column
@@ -142,27 +110,22 @@
 </template>
 
 <script>
+  import customer_edit from './customer_edit'
   export default {
-    name: "advertisement",
-
-
+    name: "customer",
+    components: {customer_edit},
     data() {
       return {
+        showEdit : false,
         options: [{
           value: '选项1',
-          label: '黄金糕'
+          label: '广告主名称'
         }, {
           value: '选项2',
-          label: '双皮奶'
+          label: '联系人'
         }, {
           value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          label: '邮箱'
         }],
         value1: '',
         value2: '',
@@ -172,63 +135,63 @@
         tableData: [{
           id: 1,
           name: '华育机房',
-          type: 'wap横幅',
-          status: '开启',
-          auditing: '已审核',
+          type: '横幅',
+          size: '100*200',
+          source: '平台',
           date: '2016-05-01',
           operation: '编辑 预览 统计',
         },
           {
             id: 2,
             name: '太原机房',
-            type: 'wap横幅',
-            status: '开启',
-            auditing: '已审核',
+            type: '横幅',
+            size: '100*200',
+            source: '平台',
             date: '2016-05-02',
             operation: '编辑 预览 统计',
           },
           {
             id: 3,
             name: '太原机房',
-            type: 'wap横幅',
-            status: '开启',
-            auditing: '已审核',
+            type: '横幅',
+            size: '100*200',
+            source: '平台',
             date: '2016-05-03',
             operation: '编辑 预览 统计',
           },
           {
             id: 4,
             name: '太原机房',
-            type: 'wap横幅',
-            status: '开启',
-            auditing: '已审核',
+            type: '横幅',
+            size: '100*200',
+            source: '平台',
             date: '2016-05-04',
             operation: '编辑 预览 统计',
           },
           {
             id: 5,
             name: '太原机房',
-            type: 'wap横幅',
-            status: '开启',
-            auditing: '已审核',
+            type: '横幅',
+            size: '100*200',
+            source: '平台',
             date: '2016-05-05',
             operation: '编辑 预览 统计',
           },
           {
             id: 6,
             name: '太原机房',
-            type: 'wap横幅',
-            status: '开启',
-            auditing: '已审核',
+            type: '横幅',
+            size: '100*200',
+            source: '平台',
             date: '2016-05-06',
             operation: '编辑 预览 统计',
           },
           {
             id: 7,
             name: '太原机房',
-            type: 'wap横幅',
-            status: '开启',
-            auditing: '已审核',
+            type: '横幅',
+            size: '100*200',
+            source: '平台',
             date: '2016-05-07',
             operation: '编辑 预览 统计',
           }]
@@ -243,6 +206,9 @@
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
+      },
+      showEditPage (){
+        this.showEdit = !this.showEdit
       }
     }
   }
@@ -282,6 +248,10 @@
 
   .select2, .select3, .select4, .input, .searchBtn {
     margin-left: 0px;
+  }
+
+  .searchBtn {
+    text-align: right;
   }
 
   #advCentre {

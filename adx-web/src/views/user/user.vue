@@ -59,7 +59,7 @@
           </el-input>
         </el-form-item>
         <el-form-item label="角色" required>
-          <el-select v-model="tempUser.roleId" placeholder="请选择">
+          <el-select filterable v-model="tempUser.roleId" placeholder="请选择">
             <el-option
               v-for="item in roles"
               :key="item.roleId"

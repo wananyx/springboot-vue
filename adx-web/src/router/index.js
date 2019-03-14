@@ -83,8 +83,8 @@ export const asyncRouterMap = [
       {
         path: 'adv',
         name: '广告管理',
-        component: _import('adv-manage/adv'),
-        meta: {title: '广告管理', icon: 'user'},
+        component: _import('adv-manage/adv/adv'),
+        meta: {title: '广告管理', navShow: true, icon: 'user'},
         menu: 'adv'
       },
       {
@@ -97,11 +97,10 @@ export const asyncRouterMap = [
       {
         path: 'customer',
         name: '客户管理',
-        component: _import('adv-manage/customer'),
+        component: _import('adv-manage/customer/customer'),
         meta: {title: '客户管理', icon: 'password'},
         menu: 'customer'
-      }
-    ]
+      }]
   },
   {
     path: '/report',
@@ -152,13 +151,6 @@ export const asyncRouterMap = [
         meta: {title: '广告投放报表', icon: ''},
         menu: 'report'
       },
-      // {
-      //   path: '7',
-      //   name: '广告投放报表',
-      //   component: _import('report-center/adv-put-report'),
-      //   meta: {title: '广告投放报表', icon: ''},
-      //   menu: 'report'
-      // },
       {
         path: '7',
         name: '广告流量明细',
