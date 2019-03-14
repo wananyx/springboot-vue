@@ -58,28 +58,28 @@
             width="100">
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="cusName"
             label="广告主名称"
             sortable
             width="180">
           </el-table-column>
           <el-table-column
-            prop="type"
+            prop="linkman"
             label="联系人"
           >
           </el-table-column>
           <el-table-column
-            prop="size"
+            prop="email"
             label="邮箱"
           >
           </el-table-column>
           <el-table-column
-            prop="source"
+            prop="openBack"
             label="开通后台"
           >
           </el-table-column>
           <el-table-column
-            prop="date"
+            prop="createDate"
             label="创建时间"
             sortable
             width="180">
@@ -112,6 +112,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import customer_edit from './customer_edit'
   export default {
     name: "customer",
@@ -130,65 +131,22 @@
           label: '邮箱'
         }],
         value1: '',
-        value2: '',
-        value3: '',
-        value4: '',
         input: '',
         tableData: [{
           id: 1,
-          name: '华育机房',
-          type: '横幅',
-          size: '100*200',
-          source: '平台',
-          date: '2016-05-01',
+          cusName: '华育机房',
+          linkman: '二狗子',
+          email: 'ergouzi@gou.com',
+          openBack: '未开通',
+          createDate: '2016-05-01'
         },
           {
             id: 2,
-            name: '太原机房',
-            type: '横幅',
-            size: '100*200',
-            source: '平台',
-            date: '2016-05-02',
-          },
-          {
-            id: 3,
-            name: '太原机房',
-            type: '横幅',
-            size: '100*200',
-            source: '平台',
-            date: '2016-05-03',
-          },
-          {
-            id: 4,
-            name: '太原机房',
-            type: '横幅',
-            size: '100*200',
-            source: '平台',
-            date: '2016-05-04',
-          },
-          {
-            id: 5,
-            name: '太原机房',
-            type: '横幅',
-            size: '100*200',
-            source: '平台',
-            date: '2016-05-05',
-          },
-          {
-            id: 6,
-            name: '太原机房',
-            type: '横幅',
-            size: '100*200',
-            source: '平台',
-            date: '2016-05-06',
-          },
-          {
-            id: 7,
-            name: '太原机房',
-            type: '横幅',
-            size: '100*200',
-            source: '平台',
-            date: '2016-05-07',
+            cusName: '华育机房',
+            linkman: '二狗子',
+            email: 'ergouzi@gou.com',
+            openBack: '未开通',
+            createDate: '2016-05-02'
           }]
       }
     },
@@ -207,7 +165,16 @@
       },
       checkDetail(){
         console.log("编辑客户资料")
+      },
+      getList () {
+        axios.get('http://localhost:8080/adv/getList').then(this.getListSucc)
+      },
+      getListSucc (res) {
+        console.log(res)
       }
+    },
+    mounted () {
+      this.getList()
     }
   }
 </script>

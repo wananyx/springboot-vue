@@ -90,7 +90,7 @@ export const asyncRouterMap = [
       {
         path: 'material',
         name: '素材管理',
-        component: _import('adv-manage/material'),
+        component: _import('adv-manage/material/material'),
         meta: {title: '素材管理', icon: 'password'},
         menu: 'material'
       },

@@ -4,4 +4,7 @@ spring:
       username: root
       password: root
 mybatis:
-   mapperLocations: classpath:/mapper/*.xml
+  typeAliasesPackage: com.yx.adx.domian
+  mapperLocations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
