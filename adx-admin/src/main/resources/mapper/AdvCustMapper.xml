@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yx.adx.dao.AdvCustMapper">
+  <resultMap id="BaseResultMap" type="com.yx.adx.domian.AdvCust">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cus_name" jdbcType="VARCHAR" property="cusName" />
+    <result column="cus_property" jdbcType="VARCHAR" property="cusProperty" />
+    <result column="linkman" jdbcType="VARCHAR" property="linkman" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="bank" jdbcType="VARCHAR" property="bank" />
+    <result column="account_name" jdbcType="VARCHAR" property="accountName" />
+    <result column="bank_num" jdbcType="VARCHAR" property="bankNum" />
+    <result column="bus_license" jdbcType="VARCHAR" property="busLicense" />
+    <result column="bus_img" jdbcType="VARCHAR" property="busImg" />
+    <result column="open_back" jdbcType="VARCHAR" property="openBack" />
+    <result column="salesman" jdbcType="VARCHAR" property="salesman" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cus_name, cus_property, linkman, email, phone, bank, account_name, bank_num, 
+    bus_license, bus_img, open_back, salesman, create_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from adv_cust
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from adv_cust
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yx.adx.domian.AdvCust">
+    insert into adv_cust (id, cus_name, cus_property, 
+      linkman, email, phone, 
+      bank, account_name, bank_num, 
+      bus_license, bus_img, open_back, 
+      salesman, create_date)
+    values (#{id,jdbcType=INTEGER}, #{cusName,jdbcType=VARCHAR}, #{cusProperty,jdbcType=VARCHAR}, 
+      #{linkman,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{bank,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, #{bankNum,jdbcType=VARCHAR}, 
+      #{busLicense,jdbcType=VARCHAR}, #{busImg,jdbcType=VARCHAR}, #{openBack,jdbcType=VARCHAR}, 
+      #{salesman,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yx.adx.domian.AdvCust">
+    insert into adv_cust
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cusName != null">
+        cus_name,
+      </if>
+      <if test="cusProperty != null">
+        cus_property,
+      </if>
+      <if test="linkman != null">
+        linkman,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="bank != null">
+        bank,
+      </if>
+      <if test="accountName != null">
+        account_name,
+      </if>
+      <if test="bankNum != null">
+        bank_num,
+      </if>
+      <if test="busLicense != null">
+        bus_license,
+      </if>
+      <if test="busImg != null">
+        bus_img,
+      </if>
+      <if test="openBack != null">
+        open_back,
+      </if>
+      <if test="salesman != null">
+        salesman,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cusName != null">
+        #{cusName,jdbcType=VARCHAR},
+      </if>
+      <if test="cusProperty != null">
+        #{cusProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null">
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null">
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null">
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNum != null">
+        #{bankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="busLicense != null">
+        #{busLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="busImg != null">
+        #{busImg,jdbcType=VARCHAR},
+      </if>
+      <if test="openBack != null">
+        #{openBack,jdbcType=VARCHAR},
+      </if>
+      <if test="salesman != null">
+        #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yx.adx.domian.AdvCust">
+    update adv_cust
+    <set>
+      <if test="cusName != null">
+        cus_name = #{cusName,jdbcType=VARCHAR},
+      </if>
+      <if test="cusProperty != null">
+        cus_property = #{cusProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null">
+        linkman = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null">
+        bank = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null">
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNum != null">
+        bank_num = #{bankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="busLicense != null">
+        bus_license = #{busLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="busImg != null">
+        bus_img = #{busImg,jdbcType=VARCHAR},
+      </if>
+      <if test="openBack != null">
+        open_back = #{openBack,jdbcType=VARCHAR},
+      </if>
+      <if test="salesman != null">
+        salesman = #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yx.adx.domian.AdvCust">
+    update adv_cust
+    set cus_name = #{cusName,jdbcType=VARCHAR},
+      cus_property = #{cusProperty,jdbcType=VARCHAR},
+      linkman = #{linkman,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      bank = #{bank,jdbcType=VARCHAR},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      bank_num = #{bankNum,jdbcType=VARCHAR},
+      bus_license = #{busLicense,jdbcType=VARCHAR},
+      bus_img = #{busImg,jdbcType=VARCHAR},
+      open_back = #{openBack,jdbcType=VARCHAR},
+      salesman = #{salesman,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="getList" resultType="com.yx.adx.domian.AdvCust">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM
+            adv_cust
+    </select>
+
+</mapper>
