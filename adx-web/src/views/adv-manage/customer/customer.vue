@@ -89,12 +89,14 @@
             label="操作"
             align="center"
           >
+            <template slot-scope="scope">
+              <el-button type="text" @click="checkDetail()">编辑</el-button>
+            </template>
           </el-table-column>
         </el-table>
       </el-main>
 
       <el-footer id="advFoot" class="block">
-        <!--<span class="demonstration">完整功能</span>-->
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -102,7 +104,7 @@
           :page-sizes="[10, 20, 30, 40]"
           :page-size="10"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="400">
+          :total=tableData.length>
         </el-pagination>
       </el-footer>
     </el-container>
@@ -139,7 +141,6 @@
           size: '100*200',
           source: '平台',
           date: '2016-05-01',
-          operation: '编辑 预览 统计',
         },
           {
             id: 2,
@@ -148,7 +149,6 @@
             size: '100*200',
             source: '平台',
             date: '2016-05-02',
-            operation: '编辑 预览 统计',
           },
           {
             id: 3,
@@ -157,7 +157,6 @@
             size: '100*200',
             source: '平台',
             date: '2016-05-03',
-            operation: '编辑 预览 统计',
           },
           {
             id: 4,
@@ -166,7 +165,6 @@
             size: '100*200',
             source: '平台',
             date: '2016-05-04',
-            operation: '编辑 预览 统计',
           },
           {
             id: 5,
@@ -175,7 +173,6 @@
             size: '100*200',
             source: '平台',
             date: '2016-05-05',
-            operation: '编辑 预览 统计',
           },
           {
             id: 6,
@@ -184,7 +181,6 @@
             size: '100*200',
             source: '平台',
             date: '2016-05-06',
-            operation: '编辑 预览 统计',
           },
           {
             id: 7,
@@ -193,7 +189,6 @@
             size: '100*200',
             source: '平台',
             date: '2016-05-07',
-            operation: '编辑 预览 统计',
           }]
       }
     },
@@ -209,6 +204,9 @@
       },
       showEditPage (){
         this.showEdit = !this.showEdit
+      },
+      checkDetail(){
+        console.log("编辑客户资料")
       }
     }
   }

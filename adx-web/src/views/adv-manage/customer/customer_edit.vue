@@ -5,18 +5,18 @@
     <el-container>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="广告主属性">
-        <el-select v-model="ruleForm.advProperty" placeholder="请选择">
+        <el-select v-model="ruleForm.cusProperty" clearable placeholder="请选择">
           <el-option label="企业" value="shanghai"></el-option>
           <el-option label="个人" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="广告主名称">
-        <el-input v-model="ruleForm.advName"></el-input>
+      <el-form-item label="广告主名称" prop="advName">
+        <el-input v-model="ruleForm.cusName"></el-input>
       </el-form-item>
-      <el-form-item label="联系人">
+      <el-form-item label="联系人" prop="linkman">
         <el-input v-model="ruleForm.linkman"></el-input>
       </el-form-item>
-      <el-form-item label="邮箱">
+      <el-form-item label="邮箱" prop="email">
         <el-input v-model="ruleForm.email"></el-input>
       </el-form-item>
       <el-form-item label="电话">
@@ -34,17 +34,28 @@
       <el-form-item label="营业执照号">
         <el-input v-model="ruleForm.busLicense"></el-input>
       </el-form-item>
+
       <el-form-item label="上传营业执照">
-        <el-input v-model="ruleForm.upload"></el-input>
+        <el-upload
+          class="upload-demo"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :on-preview="handlePreview"
+          :on-remove="handleRemove"
+          :file-list="fileList2"
+          list-type="picture">
+          <el-button size="small" type="primary">点击上传</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
       </el-form-item>
+
       <el-form-item label="是否开启后台">
         <el-radio-group v-model="ruleForm.openBack">
-          <el-radio v-model="ruleForm.openBack" label="1">是</el-radio>
-          <el-radio v-model="ruleForm.openBack" label="2">否</el-radio>
+          <el-radio v-model="ruleForm.openBack" label="true">是</el-radio>
+          <el-radio v-model="ruleForm.openBack" label="false">否</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="销售负责人">
-        <el-select placeholder="请选择">
+        <el-select v-model="ruleForm.salesman" placeholder="请选择">
           <el-option label="企业" value="shanghai"></el-option>
           <el-option label="个人" value="beijing"></el-option>
         </el-select>
@@ -66,8 +77,8 @@
     data() {
       return {
         ruleForm: {
-          advProperty: '',
-          advName: '',
+          cusProperty: '',
+          cusName: '',
           linkman: '',
           email: '',
           phone: '',
@@ -76,14 +87,22 @@
           bankNum: '',
           busLicense: '',
           upload: '',
-          openBack: '2'
+          openBack: 'false',
+          salesman: ''
         },
         rules: {
           advName: [
-            {required: true, message: '请输入活动名称', trigger: 'blur'},
-            {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
+            {required: true, message: '请输入广告主名称', trigger: 'blur'},
+            // {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
+          ],
+          linkman: [
+            {required: true, message: '请输入联系人', trigger: 'blur'},
+          ],
+          email: [
+            {required: true, message: '请输入邮箱', trigger: 'blur'},
           ]
-        }
+        },
+        fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
       };
     },
     methods: {
@@ -100,6 +119,12 @@
       resetForm(formName) {
         this.$refs[formName].resetFields();
         this.$emit('showPage',!this.show)
+      },
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
       }
     }
 
