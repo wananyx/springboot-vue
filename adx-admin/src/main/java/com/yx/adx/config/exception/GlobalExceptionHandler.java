@@ -3,10 +3,12 @@ package com.yx.adx.config.exception;
 import com.alibaba.fastjson.JSONObject;
 import com.yx.adx.util.CommonUtil;
 import com.yx.adx.util.constants.ErrorEnum;
+import com.yx.adx.util.vo.ExceptionResult;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,14 +17,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author: hxy
- * @description: 统一异常拦截
- * @date: 2017/10/24 10:31
+ * 统一异常处理
  */
 @ControllerAdvice
 @ResponseBody
 public class GlobalExceptionHandler {
 	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+
+	@ExceptionHandler(value = AdxException.class)
+	public ResponseEntity<ExceptionResult> handleException(AdxException e){
+		return ResponseEntity.status(e.getErrorEnum().getErrorCode()).body(new ExceptionResult(e.getErrorEnum()));
+	}
 
 	@ExceptionHandler(value = Exception.class)
 	public JSONObject defaultErrorHandler(HttpServletRequest req, Exception e) {
