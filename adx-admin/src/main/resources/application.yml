@@ -8,3 +8,7 @@ mybatis:
   mapperLocations: classpath:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+server:
+  port: 8888
+swagger:
+  enable: true  #生产环境下禁用

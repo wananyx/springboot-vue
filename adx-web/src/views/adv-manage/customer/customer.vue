@@ -167,7 +167,7 @@
         console.log("编辑客户资料")
       },
       getList () {
-        axios.get('http://localhost:8080/adv/getList').then(this.getListSucc)
+        axios.get('/api/adv/getList').then(this.getListSucc)
       },
       getListSucc (res) {
         console.log(res)
