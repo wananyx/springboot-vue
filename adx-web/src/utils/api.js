@@ -2,11 +2,16 @@ import axios from 'axios'
 import {Message, MessageBox} from 'element-ui'
 import {getToken} from '@/utils/auth'
 import store from '../store'
+
 // 创建axios实例
 const service = axios.create({
   baseURL: process.env.BASE_URL, // api的base_url
   timeout: 15000                  // 请求超时时间2
 })
+
+// 设置post请求头
+service.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
 // request拦截器
 service.interceptors.request.use(config => {
   return config
@@ -19,7 +24,7 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
   response => {
     const res = response.data;
-    if (res.code == '1000') {
+    if (res.code == '200') {
       return res;
     }
     if (res.code == '100') {

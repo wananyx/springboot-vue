@@ -100,9 +100,9 @@
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
-          :current-page="1"
-          :page-sizes="[10, 20, 30, 40]"
-          :page-size="10"
+          :current-page="listQuery.pageNum"
+          :page-sizes="[2, 3, 20, 30]"
+          :page-size="listQuery.pageRow"
           layout="total, sizes, prev, pager, next, jumper"
           :total=tableData.length>
         </el-pagination>
@@ -119,6 +119,10 @@
     components: {customer_edit},
     data() {
       return {
+        listQuery: {
+          pageNum: 1,//页码
+          pageRow: 2,//每页条数
+        },
         showEdit : false,
         options: [{
           value: '选项1',
@@ -132,22 +136,7 @@
         }],
         value1: '',
         input: '',
-        tableData: [{
-          id: 1,
-          cusName: '华育机房',
-          linkman: '二狗子',
-          email: 'ergouzi@gou.com',
-          openBack: '未开通',
-          createDate: '2016-05-01'
-        },
-          {
-            id: 2,
-            cusName: '华育机房',
-            linkman: '二狗子',
-            email: 'ergouzi@gou.com',
-            openBack: '未开通',
-            createDate: '2016-05-02'
-          }]
+        tableData: []
       }
     },
     methods: {
@@ -156,9 +145,20 @@
       },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
+        //改变每页数量
+        this.listQuery.pageRow = val
+        this.handleFilter();
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
+        //改变页码
+        this.listQuery.pageNum = val
+        this.getList();
+      },
+      handleFilter() {
+        //查询事件
+        this.listQuery.pageNum = 1
+        this.getList()
       },
       showEditPage (){
         this.showEdit = !this.showEdit
@@ -166,12 +166,22 @@
       checkDetail(){
         console.log("编辑客户资料")
       },
+      //获取客户列表
       getList () {
-        axios.get('/api/adv/getList').then(this.getListSucc)
+        // axios.get('/api/adv/getList')
+        //   .then(res => {
+        //   this.tableData = res.data.data
+        // })
+        this.apii.customer.getList(this.listQuery)
+          .then(res => {
+            this.tableData = res.data
+            console.log(this.tableData.length)
+          })
+          .catch(function (e) {
+            console.log('catch',e)
+          })
+
       },
-      getListSucc (res) {
-        console.log(res)
-      }
     },
     mounted () {
       this.getList()

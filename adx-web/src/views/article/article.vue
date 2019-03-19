@@ -86,15 +86,22 @@
           return
         }
         this.listLoading = true;
-        this.api({
-          url: "/article/listArticle",
-          method: "get",
-          params: this.listQuery
-        }).then(data => {
-          this.listLoading = false;
-          this.list = data.list;
-          this.totalCount = data.totalCount;
-        })
+        this.apii.article.articleList(this.listQuery)
+          .then(data => {
+            this.listLoading = false;
+            this.list = data.list;
+            this.totalCount = data.totalCount;
+          })
+
+        // this.api({
+        //   url: "/article/listArticle",
+        //   method: "get",
+        //   params: this.listQuery
+        // }).then(data => {
+        //   this.listLoading = false;
+        //   this.list = data.list;
+        //   this.totalCount = data.totalCount;
+        // })
       },
       handleSizeChange(val) {
         //改变每页数量
