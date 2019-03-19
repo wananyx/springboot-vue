@@ -198,10 +198,92 @@
   </update>
 
     <select id="getList" resultType="com.yx.adx.domian.AdvCust">
-        SELECT
+      SELECT
         <include refid="Base_Column_List" />
-        FROM
-            adv_cust
+      FROM
+        adv_cust
+      <if test="offset != null and limit != null">
+        limit #{offset}, #{limit}
+      </if>
     </select>
+    <select id="getByCusName" resultType="com.yx.adx.domian.AdvCust">
+      SELECT
+        <include refid="Base_Column_List" />
+      FROM
+        adv_cust
+      <where>
+        <if test="cusName != null and cusName != ''"> cus_name like concat('%',#{cusName},'%')</if>
+      </where>
+      <if test="offset != null and limit != null">
+        limit #{offset}, #{limit}
+      </if>
+    </select>
+    <select id="getByLinkman" resultType="com.yx.adx.domian.AdvCust">
+      SELECT
+        <include refid="Base_Column_List" />
+      FROM
+        adv_cust
+      <where>
+        <if test="linkman != null and linkman != ''"> linkman like concat('%',#{linkman},'%')</if>
+      </where>
+      <if test="offset != null and limit != null">
+        limit #{offset}, #{limit}
+      </if>
+    </select>
+    <select id="getByEmail" resultType="com.yx.adx.domian.AdvCust">
+      SELECT
+        <include refid="Base_Column_List" />
+      FROM
+        adv_cust
+      <where>
+        <if test="email != null and email != ''"> email like concat('%',#{email},'%')</if>
+      </where>
+      <if test="offset != null and limit != null">
+        limit #{offset}, #{limit}
+      </if>
+    </select>
+
+  <select id="count" resultType="int">
+    select count(*) from adv_cust
+    <where>
+      <if test="id != null and id != ''">id = #{id}</if>
+      <if test="cusName != null and cusName != ''">and cus_name = #{cusName} ,</if>
+      <if test="cusProperty != null and cusProperty != ''">and cus_property = #{cusProperty} ,</if>
+      <if test="linkman != null and linkman != ''">and linkman = #{linkman} ,</if>
+      <if test="email != null and email != ''">and email = #{email} ,</if>
+      <if test="phone != null and phone != ''">and phone = #{phone} ,</if>
+      <if test="bank != null and bank != ''">and bank = #{bank} ,</if>
+      <if test="accountName != null and accountName != ''">and account_name = #{accountName} ,</if>
+      <if test="bankNum != null and bankNum != ''">and bank_num = #{bank_num} ,</if>
+      <if test="busLicense != null and busLicense != ''">and bus_license = #{busLicense} ,</if>
+      <if test="busImg != null and busImg != ''">and bus_img = #{busImg} ,</if>
+      <if test="openBack != null and openBack != ''">and open_back = #{openBack} ,</if>
+      <if test="salesman != null and salesman != ''">and salesman = #{salesman} ,</if>
+      <if test="createDate != null and createDate != ''">and create_date = #{createDate} ,</if>
+    </where>
+  </select>
+  <select id="cusNameCount" resultType="int">
+    select count(*) from adv_cust
+    <where>
+      <if test="cusName != null and cusName != ''"> cus_name like concat('%',#{cusName},'%') </if>
+    </where>
+  </select>
+  <select id="linkmanCount" resultType="int">
+    select count(*) from adv_cust
+    <where>
+      <if test="linkman != null and linkman != ''">linkman like concat('%',#{linkman},'%')</if>
+    </where>
+  </select>
+  <select id="emailCount" resultType="int">
+    select count(*) from adv_cust
+    <where>
+      <if test="email != null and email != ''">email like concat('%',#{email},'%')</if>
+    </where>
+  </select>
+
+
+
+
+
 
 </mapper>

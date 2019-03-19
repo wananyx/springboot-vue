@@ -6,11 +6,11 @@
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="广告主属性">
         <el-select v-model="ruleForm.cusProperty" clearable placeholder="请选择">
-          <el-option label="企业" value="shanghai"></el-option>
-          <el-option label="个人" value="beijing"></el-option>
+          <el-option label="企业" value="企业"></el-option>
+          <el-option label="个人" value="个人"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="广告主名称" prop="advName">
+      <el-form-item label="广告主名称" prop="cusName">
         <el-input v-model="ruleForm.cusName"></el-input>
       </el-form-item>
       <el-form-item label="联系人" prop="linkman">
@@ -50,14 +50,14 @@
 
       <el-form-item label="是否开启后台">
         <el-radio-group v-model="ruleForm.openBack">
-          <el-radio v-model="ruleForm.openBack" label="true">是</el-radio>
-          <el-radio v-model="ruleForm.openBack" label="false">否</el-radio>
+          <el-radio v-model="ruleForm.openBack" label="是" value="true">是</el-radio>
+          <el-radio v-model="ruleForm.openBack" label="否" value="false">否</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="销售负责人">
         <el-select v-model="ruleForm.salesman" placeholder="请选择">
-          <el-option label="企业" value="shanghai"></el-option>
-          <el-option label="个人" value="beijing"></el-option>
+          <!--<el-option label="企业" value="企业"></el-option>-->
+          <!--<el-option label="个人" value="个人"></el-option>-->
         </el-select>
       </el-form-item>
 
@@ -91,7 +91,7 @@
           salesman: ''
         },
         rules: {
-          advName: [
+          cusName: [
             {required: true, message: '请输入广告主名称', trigger: 'blur'},
             // {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
           ],
@@ -109,6 +109,10 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            this.apii.customer.save(this.ruleForm)
+              .then(res => {
+                console.log(res)
+              })
             alert('submit!');
           } else {
             console.log('error submit!!');

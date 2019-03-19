@@ -17,7 +17,8 @@ public enum ErrorEnum {
 
 	E_20011(20011, "登陆已过期,请重新登陆"),
 
-	E_90003(90003, "缺少必填参数");
+	E_90003(90003, "缺少必填参数"),
+	INSERT_ERROR(400,"新增失败，请规范填写信息");
 
 	private int errorCode;
 

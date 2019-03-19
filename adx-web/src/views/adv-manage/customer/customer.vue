@@ -8,7 +8,7 @@
 
           <el-col :span="4">
             <div class="grid-content bg-purple">
-              <el-select class="select1" filterable size="small" v-model="value1" clearable placeholder="请选择查询方式">
+              <el-select class="select1" filterable size="small" v-model="listQuery.selectBy" clearable placeholder="请选择查询方式">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -21,14 +21,14 @@
 
           <el-col :span="4">
             <div class="grid-content bg-purple">
-              <el-input class="input" size="small" v-model="input" placeholder="请输入查询内容"></el-input>
+              <el-input class="input" size="small" v-model="listQuery.name" placeholder="请输入查询内容"></el-input>
             </div>
           </el-col>
 
           <el-col :span="4">
             <div class="grid-content bg-purple">
               <el-row>
-                <el-button class="searchBtn" size="small" type="primary">搜索</el-button>
+                <el-button class="searchBtn" size="small" type="primary" @click="handleFilter">搜索</el-button>
               </el-row>
             </div>
           </el-col>
@@ -104,7 +104,7 @@
           :page-sizes="[2, 3, 20, 30]"
           :page-size="listQuery.pageRow"
           layout="total, sizes, prev, pager, next, jumper"
-          :total=tableData.length>
+          :total=this.total>
         </el-pagination>
       </el-footer>
     </el-container>
@@ -119,24 +119,29 @@
     components: {customer_edit},
     data() {
       return {
+        //查询数据参数
         listQuery: {
           pageNum: 1,//页码
           pageRow: 2,//每页条数
+          selectBy: '',
+          name:''
         },
         showEdit : false,
+        //下拉框内容
         options: [{
-          value: '选项1',
+          value: '1',
           label: '广告主名称'
         }, {
-          value: '选项2',
+          value: '2',
           label: '联系人'
         }, {
-          value: '选项3',
+          value: '3',
           label: '邮箱'
         }],
-        value1: '',
-        input: '',
-        tableData: []
+        //返回的分页数据
+        tableData: [],
+        //返回数据的总条数
+        total: 0
       }
     },
     methods: {
@@ -168,14 +173,10 @@
       },
       //获取客户列表
       getList () {
-        // axios.get('/api/adv/getList')
-        //   .then(res => {
-        //   this.tableData = res.data.data
-        // })
         this.apii.customer.getList(this.listQuery)
           .then(res => {
-            this.tableData = res.data
-            console.log(this.tableData.length)
+            this.tableData = res.data.rows
+            this.total = res.data.total
           })
           .catch(function (e) {
             console.log('catch',e)

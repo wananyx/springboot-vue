@@ -1,18 +1,15 @@
 package com.yx.adx.service;
 
 import com.yx.adx.domian.AdvCust;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface AdvCustService {
 
-    int deleteByPrimaryKey(Integer id);
+    List<AdvCust> getList(Integer selectBy, String name, Integer pageNum, Integer pageRow);
 
-    int insertSelective(AdvCust record);
+    int count(Integer selectBy, String name);
 
-    AdvCust selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(AdvCust record);
-
-    List<AdvCust> getList();
+    int save(AdvCust advCust);
 }

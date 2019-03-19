@@ -17,6 +17,9 @@ const customer = {
     return axios.get('/adv/getList',{
       params: params
     });
+  },
+  save (params) {
+    return axios.post('/adv/save', qs.stringify(params))
   }
 }
 

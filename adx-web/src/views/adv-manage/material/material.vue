@@ -112,10 +112,10 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="1"
-          :page-sizes="[10, 20, 30, 40]"
+          :page-sizes="[2, 3, 4, 5]"
           :page-size="10"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="400">
+          :total="tableData.length">
         </el-pagination>
       </el-footer>
     </el-container>
