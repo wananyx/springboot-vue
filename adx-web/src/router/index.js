@@ -82,7 +82,7 @@ export const asyncRouterMap = [
     children: [
       {
         path: 'adv',
-        name: '广告管理',
+        name: '广告管理1',
         component: _import('adv-manage/adv/adv'),
         meta: {title: '广告管理', navShow: true, icon: 'user'},
         menu: 'adv'

@@ -11,12 +11,10 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.Date;
 import java.util.List;
 
 @Api(value = "广告管理的客户管理模块API文档")
@@ -67,8 +65,9 @@ public class AdvCustController {
     @PostMapping("/save")
     public Result save(AdvCust advCust){
         try {
+            advCust.setCreateDate(new Date());
             if(advCustService.save(advCust)>0){
-                return Result.oK();
+                return Result.oK("新增成功");
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -77,5 +76,45 @@ public class AdvCustController {
         return Result.error(400,"新增失败");
     }
 
+    /**
+     * 更新广告主信息
+     * @param advCust advCust对象
+     * @return 更新条数(成功则返回1)
+     */
+    @ApiOperation(value = "更新广告主信息" ,notes = "更新广告主信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "advCust",value = "advCust对象",dataType = "AdvCust"),
+    })
+    @PostMapping("/update")
+    public Result update(AdvCust advCust){
+        try {
+            if(advCustService.update(advCust)>0){
+                return Result.oK("更新成功");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new AdxException(ErrorEnum.UPDATE_ERROR);
+        }
+        return Result.error(400,"更新失败");
+    }
 
+    /**
+     * 删除广告主信息
+     * @param id 该条信息的id
+     * @return 删除行数
+     */
+    @ApiOperation(value = "删除广告主信息" ,notes = "删除广告主信息")
+    @ApiImplicitParam(name = "id",value = "对象id",dataType = "Integer")
+    @DeleteMapping("/remove")
+    public Result remove(Integer id){
+        try {
+            if(advCustService.remove(id)>0){
+                return Result.oK("删除成功");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new AdxException(ErrorEnum.UPDATE_ERROR);
+        }
+        return Result.error(400,"删除失败");
+    }
 }

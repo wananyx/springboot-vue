@@ -18,9 +18,32 @@ const customer = {
       params: params
     });
   },
+  /**
+   * 新增客户信息
+   * @param params
+   * @returns {*}
+   */
   save (params) {
     return axios.post('/adv/save', qs.stringify(params))
-  }
+  },
+  /**
+   * 更新客户信息
+   * @param params
+   * @returns {*}
+   */
+  update (params) {
+    return axios.post('/adv/update', qs.stringify(params))
+  },
+  /**
+   * 删除客户信息
+   * @param params
+   * @returns {*}
+   */
+  remove (params) {
+    return axios.delete('/adv/remove', {
+      params:{id:params}
+    })
+  },
 }
 
 export default customer;

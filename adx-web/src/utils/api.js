@@ -2,6 +2,7 @@ import axios from 'axios'
 import {Message, MessageBox} from 'element-ui'
 import {getToken} from '@/utils/auth'
 import store from '../store'
+import * as $core from "element-ui";
 
 // 创建axios实例
 const service = axios.create({
@@ -11,6 +12,8 @@ const service = axios.create({
 
 // 设置post请求头
 service.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+// axios.defaults.baseURL = $core.use('http'); //确认协议和地址
+axios.defaults.withCredentials = true;   // axios 默认不发送cookie，需要全局设置true发送cookie
 
 // request拦截器
 service.interceptors.request.use(config => {

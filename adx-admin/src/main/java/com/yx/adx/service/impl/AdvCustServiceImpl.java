@@ -66,5 +66,15 @@ public class AdvCustServiceImpl  implements AdvCustService {
         return advCustMapper.insertSelective(advCust);
     }
 
+    @Override
+    public int update(AdvCust advCust) {
+        return advCustMapper.updateByPrimaryKeySelective(advCust);
+    }
+
+    @Override
+    public int remove(Integer id) {
+        return advCustMapper.deleteByPrimaryKey(id);
+    }
+
 
 }

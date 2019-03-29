@@ -12,4 +12,8 @@ public interface AdvCustService {
     int count(Integer selectBy, String name);
 
     int save(AdvCust advCust);
+
+    int update(AdvCust advCust);
+
+    int remove(Integer id);
 }

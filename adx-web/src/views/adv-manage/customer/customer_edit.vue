@@ -3,20 +3,21 @@
 
     <h3>基本信息</h3>
     <el-container>
-    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <!--:model="ruleForm"    ref="ruleForm"  :rules="rules"  prop="cusName"  prop="linkman"  prop="email"-->
+    <el-form v-model="ruleForm" :model="ruleForm" ref="ruleForm" :rules="rules" label-width="100px" class="demo-ruleForm">
       <el-form-item label="广告主属性">
         <el-select v-model="ruleForm.cusProperty" clearable placeholder="请选择">
           <el-option label="企业" value="企业"></el-option>
           <el-option label="个人" value="个人"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="广告主名称" prop="cusName">
+      <el-form-item label="广告主名称">
         <el-input v-model="ruleForm.cusName"></el-input>
       </el-form-item>
-      <el-form-item label="联系人" prop="linkman">
+      <el-form-item label="联系人">
         <el-input v-model="ruleForm.linkman"></el-input>
       </el-form-item>
-      <el-form-item label="邮箱" prop="email">
+      <el-form-item label="邮箱">
         <el-input v-model="ruleForm.email"></el-input>
       </el-form-item>
       <el-form-item label="电话">
@@ -73,7 +74,10 @@
 <script>
   export default {
     name: "customer_edit",
-    props:['Show'],
+    props: {
+      showEdit: Boolean,
+      editRow:[Object,Boolean]
+    },
     data() {
       return {
         ruleForm: {
@@ -87,7 +91,7 @@
           bankNum: '',
           busLicense: '',
           upload: '',
-          openBack: 'false',
+          openBack: '否',
           salesman: ''
         },
         rules: {
@@ -109,11 +113,45 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.apii.customer.save(this.ruleForm)
-              .then(res => {
-                console.log(res)
-              })
-            alert('submit!');
+            //如果id为undefined则证明是新增，否则是更新
+            if(this.ruleForm.id==undefined){
+              this.apii.customer.save(this.ruleForm)
+                .then(res => {
+                  console.log(res)
+                  //清空表单内容
+                  this.$refs[formName].resetFields();
+                  //返回列表页面
+                  this.$emit('showPage',!this.show)
+                  this.$emit('save','succ')
+                })
+                .catch(e => {
+                  console.log(e)
+                  //清空表单内容
+                  this.$refs[formName].resetFields();
+                  //返回列表页面
+                  this.$emit('showPage',!this.show)
+                  this.$emit('save','fail')
+                })
+            }else {
+              this.apii.customer.update(this.ruleForm)
+                .then(res => {
+                  console.log(res)
+                  //清空表单内容
+                  this.$refs[formName].resetFields();
+                  //返回列表页面
+                  this.$emit('showPage',!this.show)
+                  this.$emit('save','succ')
+                })
+                .catch(e => {
+                  console.log(e)
+                  //清空表单内容
+                  this.$refs[formName].resetFields();
+                  //返回列表页面
+                  this.$emit('showPage',!this.show)
+                  this.$emit('save','fail')
+                })
+            }
+
           } else {
             console.log('error submit!!');
             return false;
@@ -129,6 +167,13 @@
       },
       handlePreview(file) {
         console.log(file);
+      },
+    },
+    watch: {
+      editRow:function (row) {
+        if(row!=true){
+          this.ruleForm = this.editRow;
+        }
       }
     }
 
