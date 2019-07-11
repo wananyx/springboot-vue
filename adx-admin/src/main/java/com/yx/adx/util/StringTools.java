@@ -1,7 +1,7 @@
 package com.yx.adx.util;
 
 /**
- * @author: hxy
+ * @author: jst
  * @date: 2017/10/24 10:16
  */
 public class StringTools {

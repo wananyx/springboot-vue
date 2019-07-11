@@ -8,11 +8,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-/**
- * @author: hxy
- * @description: SpringBoot启动类
- * @date: 2017/10/24 11:55
- */
+
 @EnableSwagger2
 @SpringBootApplication
 @MapperScan("com.yx.adx.dao")

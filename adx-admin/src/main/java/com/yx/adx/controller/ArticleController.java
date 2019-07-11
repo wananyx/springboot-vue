@@ -1,6 +1,7 @@
 package com.yx.adx.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yx.adx.config.exception.AdxException;
 import com.yx.adx.service.ArticleService;
 import com.yx.adx.util.CommonUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author: hxy
+ * @author: jst
  * @description: 文章相关Controller
  * @date: 2017/10/24 16:04
  */

@@ -3,7 +3,7 @@ package com.yx.adx.service;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * @author: hxy
+ * @author: jst
  * @date: 2017/10/24 16:06
  */
 public interface ArticleService {

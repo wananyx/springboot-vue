@@ -3,7 +3,7 @@ package com.yx.adx.service;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * @author: hxy
+ * @author: jst
  * @description: 用户/角色/权限
  * @date: 2017/11/2 10:18
  */
